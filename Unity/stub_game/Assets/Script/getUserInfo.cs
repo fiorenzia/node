@@ -10,8 +10,8 @@ using UnityEngine.Networking;
 public class getUserInfo : MonoBehaviour
 {
 
-    private const String URL = "http://localhost:3000/users/getUserInfo";
-
+    private const string URL = "http://localhost:3000/users/getUserInfo";
+    private const string separate = "?";
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +23,8 @@ public class getUserInfo : MonoBehaviour
     {
         // ひとまず入力の検知
         if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("★★★★左クリック★★★★"+ fileOpen());
-            StartCoroutine("OnSend", URL);
+            Debug.Log("★★★★左クリック★★★★");
+            StartCoroutine("OnSend", URL + separate + fileOpen());
         }
     }
 

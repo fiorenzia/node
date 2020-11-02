@@ -22,6 +22,7 @@ router.get('/getUserInfo', function(req, res, next) {
     if (err) throw err;
     console.log('Connected');
   });
+  req
   con.query('SELECT * FROM `t_user_info`', function (error, results, fields) {
     if (error) throw error; 
     console.log(results);
