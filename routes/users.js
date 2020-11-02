@@ -26,7 +26,7 @@ router.get('/getUserInfo', function(req, res, next) {
     if (error) throw error; 
     console.log(results);
   });
-  res.send('CALLED GET USER INFO SUCCESS');
+  res.send('CALLED GET USER INFO SUCCESS! Im Node server!');
 });
 
 
