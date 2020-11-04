@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/getUserInfo', function(req, res, next) {
  
-  let resultJson = {
+  let dwhJson = {
     gameId:'',
     totalLogin:'',
     userName:'',
@@ -19,6 +19,14 @@ router.get('/getUserInfo', function(req, res, next) {
     creationTime:'',
     updateTime:''
   }
+
+  let resultJson={
+    gameId:'',
+    userName:'',
+    inGameMoney:'',
+    stones:''
+  }
+
 
   const con = mysql.createConnection({
     host: 'localhost',
@@ -39,14 +47,12 @@ router.get('/getUserInfo', function(req, res, next) {
   con.query(sql,function (error, results) {
     if (error) throw error; 
     resultJson.gameId=results[0].GAME_ID;
-    resultJson.totalLogin=results[0].TOTAL_LOGIN;
     resultJson.userName=results[0].USER_NAME;
-    resultJson.author= results[0].AUTHOR;
-    resultJson.lastLoginTime=results[0].LAST_LOGIN_TIME;
-    resultJson.creationTime=results[0].CREATION_TIME;
-    resultJson.updateTime=results[0].UPDATE_TIME;
+    resultJson.inGameMoney=results[0].IN_GAME_MONEY;
+    resultJson.stones=results[0].STONE;
     res.header('Content-Type', 'application/json; charset=utf-8')
     res.send(resultJson);
+
   });
 });
 

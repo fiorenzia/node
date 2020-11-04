@@ -8,8 +8,9 @@ using UnityEngine.UIElements;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class getUserInfo : MonoBehaviour
+public class GetUserInfo : MonoBehaviour
 {
+    GameManager gameManager;
     private string URL = "http://localhost:3000/users/getUserInfo";
     private const string separate = "?";
     private const string paramName = "gameId";
@@ -18,38 +19,47 @@ public class getUserInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = new GameManager();
     }
 
     // Update is called once per frame
     void Update()
     {
         // ひとまず入力の検知
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             StartCoroutine("OnSend", makeUrl());
+            Debug.Log(gameManager.getGameId());
             SceneManager.LoadScene("Mypage");
         }
     }
 
-    String makeUrl() {
+    String makeUrl()
+    {
         string url = URL + separate + paramName + equal + fileOpen();
         return url;
     }
 
     // 外部ファイル読み込み
-    String fileOpen() {
+    String fileOpen()
+    {
         String gameId = "";
         FileInfo file = new FileInfo(Application.dataPath + "/file/game_id");
         // fileの存在確認後、未存在の場合は初回ユーザ登録へ遷移させる。
-        try {
+        try
+        {
             using (StreamReader sr = new StreamReader(file.OpenRead()))
             {
                 gameId = sr.ReadToEnd();
                 sr.Close();
             }
-        } catch {
+        }
+        catch
+        {
             // ひとまずなし
-        } finally { 
+        }
+        finally
+        {
             // 後で考える
         }
         return gameId;
@@ -73,6 +83,12 @@ public class getUserInfo : MonoBehaviour
         {
             //通信成功
             Debug.Log(webRequest.downloadHandler.text);
+            UserInfo userInfo = JsonUtility.FromJson<UserInfo>(webRequest.downloadHandler.text);
+            gameManager.setGameId(userInfo.gameId);
+            gameManager.setUserName(userInfo.userName);
+            gameManager.setIngameMoney(userInfo.InGameMoney);
+            gameManager.setStone(userInfo.Stone);
+            Debug.Log(gameManager.getGameId());
         }
     }
 }
