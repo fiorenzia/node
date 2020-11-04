@@ -9,9 +9,11 @@ using UnityEngine.Networking;
 
 public class getUserInfo : MonoBehaviour
 {
-
-    private const string URL = "http://localhost:3000/users/getUserInfo";
+    private string URL = "http://localhost:3000/users/getUserInfo";
     private const string separate = "?";
+    private const string paramName = "gameId";
+    private const string equal = "=";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +26,14 @@ public class getUserInfo : MonoBehaviour
         // ひとまず入力の検知
         if (Input.GetMouseButtonDown(0)) {
             Debug.Log("★★★★左クリック★★★★");
-            StartCoroutine("OnSend", URL + separate + fileOpen());
+
+            StartCoroutine("OnSend", makeUrl());
         }
+    }
+
+    String makeUrl() {
+        string url = URL + separate + paramName + equal + fileOpen();
+        return url;
     }
 
     // 外部ファイル読み込み
