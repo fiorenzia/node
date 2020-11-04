@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.U2D.Animation;
 using UnityEngine.UIElements;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class getUserInfo : MonoBehaviour
 {
@@ -25,9 +26,8 @@ public class getUserInfo : MonoBehaviour
     {
         // ひとまず入力の検知
         if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("★★★★左クリック★★★★");
-
             StartCoroutine("OnSend", makeUrl());
+            SceneManager.LoadScene("Mypage");
         }
     }
 
