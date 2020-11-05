@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
-
+const loginRecord = require('../app/record/userLogin.js');
+const conf = require('../app/conf/sql.json');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,16 +11,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/getUserInfo', function(req, res, next) {
  
-  let dwhJson = {
-    gameId:'',
-    totalLogin:'',
-    userName:'',
-    author:'',
-    lastLoginTime:'',
-    creationTime:'',
-    updateTime:''
-  }
-
   let resultJson={
     gameId:'',
     userName:'',
@@ -41,10 +32,7 @@ router.get('/getUserInfo', function(req, res, next) {
     console.log('Connected');
   });
   
-  const id = req.query.gameId;
-  const sql = 'SELECT * FROM t_user_info where game_id = ' + id;
-
-  con.query(sql,function (error, results) {
+  con.query(conf.userInfo,[req.query.gameId],function (error, results) {
     if (error) throw error; 
     resultJson.gameId=results[0].GAME_ID;
     resultJson.userName=results[0].USER_NAME;
@@ -52,7 +40,8 @@ router.get('/getUserInfo', function(req, res, next) {
     resultJson.stones=results[0].STONE;
     res.header('Content-Type', 'application/json; charset=utf-8')
     res.send(resultJson);
-
+    console.log("user info data finish");
+    loginRecord.insert(resultJson.gameId);
   });
 });
 

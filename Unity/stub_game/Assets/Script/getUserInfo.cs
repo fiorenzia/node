@@ -7,6 +7,7 @@ using UnityEngine.U2D.Animation;
 using UnityEngine.UIElements;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UniRx;
 
 public class GetUserInfo : MonoBehaviour
 {
@@ -23,12 +24,12 @@ public class GetUserInfo : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         // ひとまず入力の検知
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine("OnSend", makeUrl());
+            await StartCoroutine("OnSend", makeUrl());
             Debug.Log(gameManager.getGameId());
             SceneManager.LoadScene("Mypage");
         }

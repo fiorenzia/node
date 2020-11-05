@@ -1,4 +1,7 @@
 node_modules/
 Unity/stub_game/Library/
 Unity/stub_game/Temp/
-Unity/stub_game/Build
+Unity/stub_game/Build/
+Unity/stub_game/Assets/Plugins/
+Unity/stub_game/UniRx.csproj
+Unity/stub_game/UniRx.Examples.csproj
