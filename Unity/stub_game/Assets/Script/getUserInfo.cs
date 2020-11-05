@@ -16,7 +16,7 @@ public class GetUserInfo : MonoBehaviour
     private const string separate = "?";
     private const string paramName = "gameId";
     private const string equal = "=";
-
+    private bool isConnectSuccess = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,13 @@ public class GetUserInfo : MonoBehaviour
         {
             await StartCoroutine("OnSend", makeUrl());
             Debug.Log(gameManager.getGameId());
-            SceneManager.LoadScene("Mypage");
+            if (isConnectSuccess)
+            {
+                SceneManager.LoadScene("Mypage");
+            } else {
+                // 今のところなし  
+                Debug.Log("failed");
+            }
         }
     }
 
@@ -79,6 +85,7 @@ public class GetUserInfo : MonoBehaviour
         {
             //通信失敗
             Debug.Log(webRequest.error);
+            isConnectSuccess = false;
         }
         else
         {

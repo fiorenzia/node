@@ -33,7 +33,7 @@ router.get('/getUserInfo', function(req, res, next) {
   });
   
   con.query(conf.userInfo,[req.query.gameId],function (error, results) {
-    if (error) throw error; 
+    if (error || results.length>=2 || results.length==0) throw error; 
     resultJson.gameId=results[0].GAME_ID;
     resultJson.userName=results[0].USER_NAME;
     resultJson.inGameMoney=results[0].IN_GAME_MONEY;
