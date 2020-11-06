@@ -3,7 +3,8 @@ const router = express.Router();
 const loginRecord = require('../app/record/userLogin.js');
 const conf = require('../app/conf/sql.json');
 const userInfoFormat = require('../app/format/userInfo.js');
-const mysql = require('mysql');
+const gamedb = require('../app/db/gameDb.js')
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -11,18 +12,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getUserInfo', function(req, res, next) {
-  const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database:'game',
-    port:3306
-  });
-  con.connect(function(err) {
-    if (err) throw err;
-    console.log('Connected');
-  });
-  con.query(conf.userInfo,[req.query.gameId],function (error, results) {
+
+  gamedb.query(conf.userInfo,[req.query.gameId],function (error, results) {
     if (error || results.length>=2 || results.length==0) throw error; 
     userInfoFormat.gameId=results[0].GAME_ID;
     userInfoFormat.userName=results[0].USER_NAME;
