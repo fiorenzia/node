@@ -4,16 +4,16 @@ const conf = require('../conf/sql.json');
 
 
 exports.insert=function(gameId){
+
+  const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database:'user_audit',
+    port:3306
+  });
+
     console.log("LoginRecord >--begin-->")
-
-    const con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database:'user_audit',
-        port:3306
-      });
-
     const date = new Date();
     const formatted = date.toFormat("YYYYMMDDHH24MISS");
     console.log(formatted);
@@ -22,7 +22,6 @@ exports.insert=function(gameId){
         if (error) throw error; 
         console.log("LoginRecord <--finish--< ");
       });
-    
 }
 
 
