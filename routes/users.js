@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 router.get('/getUserInfo', function(req, res, next) {
 
   gamedb.query(conf.userInfo,[req.query.gameId],function (error, results) {
-    if (error || results.length>=2 || results.length==0) throw error; 
+    if (error || results.length != 1) throw error; 
     userInfoFormat.gameId=results[0].GAME_ID;
     userInfoFormat.userName=results[0].USER_NAME;
     userInfoFormat.inGameMoney=results[0].IN_GAME_MONEY;
