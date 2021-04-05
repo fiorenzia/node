@@ -12,7 +12,7 @@ let userAuditDbConfig={
 let userAuditDbConnection;
 
 function handleDisconnectUserAuditDb() {
-    console.log('create mysql connection');
+    console.log('create mysql connection --> userAuditDb');
 　　 //接続準備mysqlのcreateconnection呼び出して変数へ格納
     userAuditDbConnection = mysql.createConnection(userAuditDbConfig); 
 

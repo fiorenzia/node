@@ -12,7 +12,7 @@ let gameDbConfig={
 let gameDbConnection;
 
 function handleDisconnectGameDb() {
-    console.log('create mysql connection');
+    console.log('create mysql connection --> gameDb');
 　　 //接続準備mysqlのcreateconnection呼び出して変数へ格納
     gameDbConnection = mysql.createConnection(gameDbConfig); 
 
