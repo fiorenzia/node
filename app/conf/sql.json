@@ -1,4 +1,5 @@
 {
     "loginRecordSql":"INSERT INTO t_user_login_info (GAME_ID, LOGIN_TIME) VALUES (?,?)",
-    "userInfo":"SELECT * FROM t_user_info where game_id = ?"
+    "userInfo":"SELECT * FROM t_user_info where game_id = ?",
+    "loginIncrement":"UPDATE t_user_info SET total_login = ? WHERE game_id = ?"
 }

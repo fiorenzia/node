@@ -60,6 +60,7 @@
     <Compile Include="Assets\Script\UserInfo.cs" />
     <Compile Include="Assets\Script\GetUserInfo.cs" />
     <Compile Include="Assets\Script\MypageManager.cs" />
+    <Compile Include="Assets\Script\MyPageButton.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
